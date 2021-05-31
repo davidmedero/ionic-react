@@ -2,6 +2,7 @@ const calculateBtn = document.querySelector("ion-button");
 const heightInput = document.getElementById("height-input");
 const weightInput = document.getElementById("weight-input");
 const resetBtn = document.getElementById("reset-btn");
+const result = document.getElementById("result");
 
 const calculateBmi = () => {
   const enteredHeight = +heightInput.value;
@@ -9,7 +10,17 @@ const calculateBmi = () => {
 
   const bmi = enteredWeight / (enteredWeight * enteredHeight);
 
-  document.getElementById("result").innerHTML = bmi || "Must be a valid number";
+  if (isNaN(bmi)) {
+    alert("Not a number, please check inputs");
+    return;
+  }
+
+  resultContainer = document.createElement("ion-card");
+  resultContainer.innerHTML = `<ion-card-content>
+        <h2>${bmi}</h2>
+    </ion-card-content>`;
+
+  result.appendChild(resultContainer);
 };
 
 calculateBtn.addEventListener("click", calculateBmi);
